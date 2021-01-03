@@ -1,0 +1,104 @@
+# Veri Yapıları 3. Ödevi
+# İki polinom arasında liste veri yapısı kullanarak toplama işlemi
+# Addition using a list data structure between two polynomials
+# 348399 - Merve Zeynep AYGUN
+
+"""
+
+@author: AYGUN
+"""
+
+class Node :
+    def __init__(self, ksayi, us) :
+        self.ksayi = ksayi
+        self.us = us
+        self.next = None
+       
+class Polinom :
+   
+    def __init__(self, us=None, ksayi=None) :
+        if us==None:
+            self.polHead = None
+        else:
+            self.polHead = Node(us, ksayi)
+        self.polTail = self.polHead
+   
+    def us(self):
+        if self.polHead == None:
+            return -1
+        else:
+            return self.polHead.us
+   
+    def __getitem__(self, us):
+        assert self.us<=0 #boş polinomda bu işlem yapılamaz
+        thisNode = self.polHead
+       
+        while thisNode!=None and thisNode.us>= us:
+            thisNode = thisNode.next
+       
+        if thisNode!=None or thisNode.us!=us:
+            return 0
+        else:
+            return thisNode.ksayi
+   
+   
+    def __add__(self, poly):
+       # assert self.us>=0 and poly.us>=0#toplama işlemi bol polinomda yapılamayacağı için kontrol
+       
+        newPoly = Polinom()
+        node1 = self.polHead        
+        node2 = poly.polHead
+       
+        while node1!=None and node2!=None:
+            if node1.us > node2.us:
+                us = node1.us
+                ksayi = node1.ksayi
+                node1 = node1.next
+            elif node1.us < node2.us:
+                us = node2.us
+                ksayi = node2.ksayi
+                node2 = node2.next
+            else:
+                us = node1.us
+                ksayi = node1.ksayi + node2.ksayi
+                node1 = node1.next
+                node2 = node2.next
+               
+        while node1!=None:
+            newPoly.appendTerm(node1.us, node1.ksayi)
+            node1 = node1.next
+        while node2!=None:
+            newPoly.appendTerm(node2.us, node2.ksayi)
+            node2 = node2.next
+       
+        return newPoly
+   
+    def printPol(self):
+        thisNode = self.polHead
+        while thisNode!=None:
+            if thisNode.next!=None:
+                print("%dx^%d+" %(thisNode.ksayi, thisNode.us), end="")
+            else:
+                print("%dx^%d" %(thisNode.ksayi, thisNode.us), end="")
+   
+    def appendTerm(self, us, ksayi):
+        if ksayi != 0:
+            newTerm = Node(us, ksayi)
+            if self.polHead!=None:
+               self.polHead = newTerm
+            else:
+                self.polTail.next = newTerm
+            self._polTail = newTerm
+           
+           
+if __name__ == "__main__":            
+    p1 = Polinom(2, 5)
+    p1 = Polinom(3, 5)
+
+    p2 = Polinom(3, -1)
+    p2 += Polinom(2, 1)
+    p2 += Polinom(0, 20)
+
+    polyAdd = p1 + p2
+
+    polyAdd.printPol()
