@@ -4,20 +4,14 @@
 # 348403 - Hatice YASAR
 
 class LinkedList:
-    """A base class providing a doubly linked list representation."""
-
-    #-------------------------- nested _Node class --------------------------
-    # nested _Node class
+   
     class _Node:
-        """Lightweight, nonpublic class for storing a doubly linked node."""
-
-        def __init__(self, us, ksayi, prev, next):  # initialize node's fields
+        def __init__(self, us, ksayi, prev, next):  
             self._us = us
             self._ksayi = ksayi
             self._prev = prev
             self._next = next
 
-    #-------------------------- list constructor --------------------------
 
     def __init__(self):
         """Create an empty list."""
@@ -25,14 +19,14 @@ class LinkedList:
         self._tail = None
         self._size = 0  # number of elements
 
-    #-------------------------- public accessors --------------------------
+    
 
     def __len__(self):
-        """Return the number of elements in the list."""
+      
         return self._size
 
     def is_empty(self):
-        """Return True if list is empty."""
+        
         return self._size == 0
 
     def add_first(self, us, ksayi):
@@ -86,7 +80,6 @@ class LinkedList:
             print(self._head._ksayi, "x^", self._head._us," ",end='')
             self._head = self._head._next
 
-    #-------------------------- nonpublic utilities --------------------------
 
     def _insert_between(self, us, ksayi, predecessor, successor):
         """Add element e between two existing nodes and return new node."""
