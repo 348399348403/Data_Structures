@@ -1,5 +1,5 @@
 # Veri Yapıları 5. Ödevi
-# euler tour code using the tree structure
+# euler tour with using the tree structure
 # 348403 - Hatice YASAR
 class Node:
     def __init__(self, data):
