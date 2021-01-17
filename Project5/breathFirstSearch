@@ -1,3 +1,7 @@
+# Veri Yapıları 5.ödev
+# 348399-Merve Zeynep Aygün
+# breadth first search with using tree structure
+
 class Tree:
     def __init__(self,data):
         self.data = data
