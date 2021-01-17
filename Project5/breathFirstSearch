@@ -1,0 +1,53 @@
+class Tree:
+    def __init__(self,data):
+        self.data = data
+        self.right = None
+        self.left = None
+    def insert(self,data):
+        if (self.data is None):
+            self.data = data
+        else:
+            if( data < self.data ):
+                if (self.left is None): 
+                    self.left = Tree(data)
+                else:
+                    self.left.insert(data)
+            elif( data > self.data ):
+                if ( self.right is None):
+                    self.right = Tree(data)
+                else:
+                    self.right.insert(data)
+    def find_height(self,Root):
+        if (Root is None):
+            return 0
+        else:
+            l_subtree = self.find_height(Root.left)
+            r_subtree= self.find_height(Root.right)
+            return max(l_subtree,r_subtree)+1
+    def level_order(self,Root):
+        
+        height = self.find_height(Root)
+        for i in range(0,height):
+            self.traversal(Root,i)
+    def traversal(self,Root,level):
+        if Root==None:
+            return
+        elif level==0:
+            print(Root.data,end = ' ')
+        elif level >0:
+            self.traversal(Root.left,level-1)
+            self.traversal(Root.right,level-1)
+    
+Root = Tree(25)
+Root.insert(12)
+Root.insert(10)
+Root.insert(22)
+Root.insert(5)
+Root.insert(36)
+Root.insert(30)
+Root.insert(40)
+Root.insert(28)
+Root.insert(38)
+Root.insert(48)
+print('Level order traversal :',end = '')
+Root.level_order(Root)
