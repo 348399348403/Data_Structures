@@ -1,6 +1,7 @@
 # Veri Yapıları 5. Ödevi
 # euler tour with using the tree structure
 # 348403 - Hatice YASAR
+# 348399 - Merve Zeynep Aygün
 class Node:
     def __init__(self, data):
         self.left   = None
